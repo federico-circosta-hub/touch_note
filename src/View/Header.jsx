@@ -10,17 +10,13 @@ import {
   Avatar,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { loggedUser, store } from "../Model/UserSlice";
-import { useSelector } from "react-redux";
+import { clearUser, loggedUser } from "../Model/UserSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function MenuAppBar() {
   const user = useSelector(loggedUser);
-  const [auth, setAuth] = useState(true);
+  const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState(null);
-
-  const handleChange = (event) => {
-    setAuth(event.target.checked);
-  };
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -28,6 +24,10 @@ export default function MenuAppBar() {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const logout = () => {
+    dispatch(clearUser());
   };
 
   return (
@@ -46,30 +46,27 @@ export default function MenuAppBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Touch notes
           </Typography>
-          {auth && (
-            <div>
-              <IconButton onClick={handleMenu} sx={{ p: 0 }}>
-                <Avatar alt={user.name} src="/static/images/avatar/2.jpg" />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
-              </Menu>
-            </div>
-          )}
+          <div>
+            <IconButton onClick={handleMenu} sx={{ p: 0 }}>
+              <Avatar alt={user.name} src="/static/images/avatar/2.jpg" />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={logout}>Log-out</MenuItem>
+            </Menu>
+          </div>
         </Toolbar>
       </AppBar>
     </Box>
