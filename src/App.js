@@ -1,5 +1,5 @@
 import React from "react";
-import LoginPage from "./View/LoginPage.tsx";
+import { LoginPage } from "./View/Login/LoginPage.jsx";
 import Home from "./View/Home.tsx";
 import { loggedUser } from "./Model/UserSlice.js";
 import { useSelector } from "react-redux";
