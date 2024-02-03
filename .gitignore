@@ -13,6 +13,7 @@ app/.pnp.js
 /app/build
 
 # misc
+server/.env
 app/.DS_Store
 app/.env.local
 app/.env.development.local
