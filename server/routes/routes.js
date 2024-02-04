@@ -1,11 +1,11 @@
 import { Router } from "express";
-import Model from "../model/note.js";
+import noteModel from "../model/noteModel.js";
 
 const noteRouter = Router();
 
 //Post Method
 noteRouter.post("/post/note", async (req, res) => {
-  const data = new Model({
+  const data = new noteModel({
     title: req.body.title,
     content: req.body.content,
     user_id: req.body.user_id,
@@ -20,13 +20,13 @@ noteRouter.post("/post/note", async (req, res) => {
 });
 
 //Get all Method
-noteRouter.get("/get/note", (req, res) => {
-  res.send("Get All API");
-});
-
-//Get by ID Method
-noteRouter.get("/get/note/:id", (req, res) => {
-  res.send("Get by ID API");
+noteRouter.get("/get/note", async (req, res) => {
+  try {
+    const data = await noteModel.find();
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
 
 //Update by ID Method
