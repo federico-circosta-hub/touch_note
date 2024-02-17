@@ -18,7 +18,7 @@ const baseStyle = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    gap: "2.5vh",
+    gap: "2vh",
     padding: "6vh",
   },
 };

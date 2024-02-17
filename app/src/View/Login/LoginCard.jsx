@@ -4,13 +4,16 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../../Model/UserSlice.js";
 import { User } from "../../Model/User.ts";
 
-export const LoginCard = ({ setSelect: setSelect }) => {
+export const LoginCard = ({ setSelect }) => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
   const dispatch = useDispatch();
   return (
     <>
+      <h2 className="text-4xl text-slate-600 font-semibold">
+        Effettua il login
+      </h2>
       <Box
         component="form"
         sx={{
@@ -18,7 +21,7 @@ export const LoginCard = ({ setSelect: setSelect }) => {
         }}
         noValidate
         autoComplete="off"
-        style={{ display: "flex", flexDirection: "column" }}
+        className="flex flex-col"
       >
         <TextField
           required
@@ -43,14 +46,10 @@ export const LoginCard = ({ setSelect: setSelect }) => {
         Accedi
       </Button>
       <Divider />
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <p>Non hai un account?</p>
+      <div className="flex flex-col items-center gap-4">
+        <p className="text-slate-600 text-lg font-semibold">
+          ...oppure non hai un account?
+        </p>
         <Button
           variant="outlined"
           size="large"
